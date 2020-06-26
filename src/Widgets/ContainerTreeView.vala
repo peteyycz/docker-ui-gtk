@@ -25,20 +25,28 @@ public class Docker.ContainerTreeView : Gtk.ApplicationWindow {
 		Object (application: app, title: "Docker containers running on the machine");
 		this.entries = entries;
 
-		this.set_default_size (250, 100);
-		this.border_width = 10;
+		set_default_size (250, 100);
+		border_width = 10;
+
+		var refresh = new Gtk.Button.from_icon_name ("view-refresh-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
+		var header = new Gtk.HeaderBar ();
+		header.set_title ("Hello");
+		header.pack_end (refresh);
+		header.set_show_close_button (true);
+
+		set_titlebar (header);
 
 		var view = new Gtk.TreeView ();
-		this.setup_treeview (view);
+		setup_treeview (view);
 		view.expand = true;
 
-		label = new Gtk.Label ("");
+		var label = new Gtk.Label ("");
 
 		var grid = new Gtk.Grid ();
 
 		grid.attach (view, 0, 0, 1, 1);
 		grid.attach (label, 0, 1, 1, 1);
-		this.add (grid);
+		add (grid);
     }
     
     void setup_treeview (Gtk.TreeView view) {
